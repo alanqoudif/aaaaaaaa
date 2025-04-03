@@ -1,5 +1,6 @@
 import { Analytics } from "@vercel/analytics/react";
 import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 import 'katex/dist/katex.min.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Metadata, Viewport } from "next";
@@ -9,78 +10,69 @@ import { Toaster } from "sonner";
 import "./globals.css";
 import { Providers } from './providers';
 
+const syne = Syne({ subsets: ['latin'], variable: '--font-syne' });
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://scira.ai"),
-  title: "Scira AI",
-  description: "Scira AI is a minimalistic AI-powered search engine that helps you find information on the internet.",
+  metadataBase: new URL("https://thaki.ai"),
+  title: "ذكي 🤖",
+  description: "محرك بحث ذكي مدعوم بالذكاء الاصطناعي يساعدك في العثور على المعلومات على الإنترنت.",
   openGraph: {
-    url: "https://scira.ai",
-    siteName: "Scira AI",
+    url: "https://thaki.ai",
+    siteName: "ذكي",
   },
   keywords: [
-    "scira.ai",
-    "scira ai",
-    "Scira AI",
-    "scira AI",
-    "SCIRA.AI",
-    "scira github",
+    "thaki.ai",
+    "thaki ai",
+    "Thaki AI",
+    "thaki AI",
+    "THAKI.AI",
+    "thaki github",
     "ai search engine",
-    "Scira",
-    "scira",
-    "scira.app",
-    "scira ai",
-    "scira ai app",
-    "scira",
-    "MiniPerplx",
-    "Scira AI",
+    "Thaki",
+    "thaki",
+    "thaki.app",
+    "thaki ai",
+    "thaki ai app",
+    "thaki",
     "open source ai search engine",
     "minimalistic ai search engine",
     "ai search engine",
-    "Scira (Formerly MiniPerplx)",
     "AI Search Engine",
-    "mplx.run",
-    "mplx ai",
-    "zaid mukaddam",
-    "scira.how",
     "search engine",
     "AI",
-    "perplexity",
+    "ذكي",
+    "ذكاء اصطناعي",
+    "محرك بحث",
+    "محرك بحث ذكي",
   ]
 };
 
 export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  minimumScale: 1,
-  maximumScale: 1,
-  userScalable: false,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#171717' }
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
-}
-
-const syne = Syne({ 
-  subsets: ['latin'], 
-  variable: '--font-syne',
-   preload: true,
-  display: 'swap',
-});
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${GeistSans.variable} ${syne.variable} font-sans antialiased`} suppressHydrationWarning>
-        <NuqsAdapter>
-          <Providers>
-            <Toaster position="top-center" />
-            {children}
-          </Providers>
-        </NuqsAdapter>
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className={`${GeistSans.variable} ${GeistMono.variable} ${syne.variable} font-arabic antialiased`}>
+        <Providers>
+          <NuqsAdapter />
+          {children}
+          <Toaster position="bottom-center" />
+        </Providers>
         <Analytics />
       </body>
     </html>

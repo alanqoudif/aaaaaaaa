@@ -1,16 +1,25 @@
 // https://env.t3.gg/docs/nextjs#validate-schema-on-build-(recommended)
 import { createJiti } from 'jiti'
 import { fileURLToPath } from 'node:url'
+import createNextIntlPlugin from 'next-intl/plugin';
+
 const jiti = createJiti(fileURLToPath(import.meta.url))
 
 // Import env here to validate during build. Using jiti we can import .ts files :)
 jiti.import('./env/server')
 jiti.import('./env/client')
 
+const withNextIntl = createNextIntlPlugin();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     transpilePackages: ["geist"],
     output: 'standalone',
+    i18n: {
+        locales: ['ar', 'en'],
+        defaultLocale: 'ar',
+        localeDetection: true,
+    },
     async headers() {
         return [
             {
@@ -36,12 +45,12 @@ const nextConfig = {
         return [
             {
                 source: '/ph',
-                destination: 'https://www.producthunt.com/posts/scira',
+                destination: 'https://www.producthunt.com/posts/thaki',
                 permanent: true,
             },
             {
                 source: '/raycast',
-                destination: 'https://www.raycast.com/zaidmukaddam/scira',
+                destination: 'https://www.raycast.com/zaidmukaddam/thaki',
                 permanent: true,
             }
         ]
@@ -106,4 +115,4 @@ const nextConfig = {
     },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
