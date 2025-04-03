@@ -5,8 +5,8 @@ import { z } from 'zod'
 export const serverEnv = createEnv({
   server: {
     XAI_API_KEY: z.string().min(1),
-    MISTRAL_API_KEY: z.string().min(1).optional(),
-    COHERE_API_KEY: z.string().min(1).optional(), 
+    MISTRAL_API_KEY: z.string().optional(),
+    COHERE_API_KEY: z.string().optional(), 
     CEREBRAS_API_KEY: z.string().min(1),
     GROQ_API_KEY: z.string().min(1),
     E2B_API_KEY: z.string().min(1),
@@ -25,8 +25,8 @@ export const serverEnv = createEnv({
     CRON_SECRET: z.string().min(1),
     BLOB_READ_WRITE_TOKEN: z.string().min(1),
     MEM0_API_KEY: z.string().min(1),
-    MEM0_ORG_ID: z.string().min(1).optional(),
-    MEM0_PROJECT_ID: z.string().min(1).optional(),
+    MEM0_ORG_ID: z.string().optional(),
+    MEM0_PROJECT_ID: z.string().optional(),
   },
   experimental__runtimeEnv: process.env,
 })
