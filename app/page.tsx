@@ -131,7 +131,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ImageIcon } from '@radix-ui/react-icons';
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export const maxDuration = 120;
+export const maxDuration = 60;
 
 interface Attachment {
     name: string;
