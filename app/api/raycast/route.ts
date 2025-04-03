@@ -16,7 +16,11 @@ const scira = customProvider({
     }
 })
 
-export const maxDuration = 60;
+const config = {
+    maxDuration: 60
+};
+
+export { config as config };
 
 interface XResult {
     id: string;
