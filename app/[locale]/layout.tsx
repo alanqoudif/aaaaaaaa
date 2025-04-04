@@ -1,8 +1,10 @@
+'use client';
+
 import { NextIntlClientProvider } from 'next-intl';
 import { i18n } from '@/i18n.config';
 import arMessages from '@/messages/ar';
 import enMessages from '@/messages/en';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 
 export function generateStaticParams() {
     return i18n.locales.map(locale => ({ locale }));
@@ -10,14 +12,14 @@ export function generateStaticParams() {
 
 type Props = {
     children: React.ReactNode;
-    params: { locale: string };
 };
 
 export default function LocaleLayout({
     children,
-    params,
 }: Props) {
-    const locale = params.locale;
+    const params = useParams();
+    const locale = params.locale as string;
+
     if (!i18n.locales.includes(locale)) {
         notFound();
     }
