@@ -13,14 +13,19 @@ type Props = {
     params: { locale: string };
 };
 
+async function getLocale(params: { locale: string }) {
+    const locale = params.locale;
+    if (!i18n.locales.includes(locale)) {
+        return i18n.defaultLocale;
+    }
+    return locale;
+}
+
 export default async function LocaleLayout({
     children,
     params,
 }: Props) {
-    // التحقق من صحة اللغة
-    const locale = i18n.locales.includes(params.locale) ? params.locale : i18n.defaultLocale;
-    
-    // اختيار ملف الترجمة المناسب
+    const locale = await getLocale(params);
     const messages = locale === 'ar' ? arMessages : enMessages;
     const isRTL = locale === 'ar';
 
