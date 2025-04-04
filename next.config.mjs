@@ -9,17 +9,12 @@ const jiti = createJiti(fileURLToPath(import.meta.url))
 jiti.import('./env/server')
 jiti.import('./env/client')
 
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin('./app/i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     transpilePackages: ["geist"],
     output: 'standalone',
-    i18n: {
-        locales: ['ar', 'en'],
-        defaultLocale: 'ar',
-        localeDetection: true,
-    },
     async headers() {
         return [
             {

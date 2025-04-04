@@ -1,32 +1,39 @@
 import { NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
 import { i18n } from '@/i18n.config';
+import arMessages from '@/messages/ar';
+import enMessages from '@/messages/en';
 
 export function generateStaticParams() {
-    return i18n.locales.map((locale) => ({ locale }));
+    return i18n.locales.map(locale => ({ locale }));
+}
+
+async function getLocale(params: { locale: string }) {
+    'use server';
+    return params.locale;
 }
 
 export default async function LocaleLayout({
     children,
-    params: { locale }
+    params,
 }: {
     children: React.ReactNode;
     params: { locale: string };
 }) {
-    let messages;
-    try {
-        messages = (await import(`@/messages/${locale}/index`)).default;
-    } catch (error) {
-        notFound();
-    }
+    // انتظار الحصول على قيمة locale
+    const paramLocale = await getLocale(params);
+    
+    // التحقق من صحة اللغة
+    const locale = i18n.locales.includes(paramLocale) ? paramLocale : i18n.defaultLocale;
+    
+    // اختيار ملف الترجمة المناسب
+    const messages = locale === 'ar' ? arMessages : enMessages;
+    const isRTL = locale === 'ar';
 
     return (
-        <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-            <body className={locale === 'ar' ? 'font-arabic' : 'font-sans'}>
-                <NextIntlClientProvider locale={locale} messages={messages}>
-                    {children}
-                </NextIntlClientProvider>
-            </body>
-        </html>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+            <div lang={locale} dir={isRTL ? 'rtl' : 'ltr'} className={isRTL ? 'font-arabic' : ''}>
+                {children}
+            </div>
+        </NextIntlClientProvider>
     );
 } 

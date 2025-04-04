@@ -1,31 +1,34 @@
 export default {
     site: {
         name: 'Thaki 🤖',
-        description: 'A minimalistic AI-powered search engine that helps you find information on the internet.',
+        description: 'Thaki Platform - Your Smart Assistant for Finding Tools and Services',
     },
     nav: {
-        new: 'New',
-        deploy: 'Deploy with Vercel',
+        home: 'Home',
         about: 'About',
-        theme: 'Toggle theme',
-    },
-    home: {
-        explore: 'What do you want to explore?',
-        placeholder: 'Type your question here...',
-        send: 'Send',
-        stop: 'Stop',
-        regenerate: 'Regenerate',
-        copy: 'Copy',
-        copied: 'Copied!',
-        suggestedQuestions: 'Suggested Questions',
+        search: 'Search',
+        tools: 'Tools',
     },
     search: {
-        searching: 'Searching...',
+        placeholder: 'Type your question here...',
+        button: 'Search',
+        loading: 'Searching...',
         noResults: 'No results found',
         error: 'An error occurred while searching',
     },
     language: {
-        name: 'English',
-        switch: 'Switch language',
+        switch: 'العربية',
+        current: 'English',
+    },
+    common: {
+        loading: 'Loading...',
+        error: 'An error occurred',
+        success: 'Success',
+        retry: 'Retry',
+        cancel: 'Cancel',
+        save: 'Save',
+        delete: 'Delete',
+        edit: 'Edit',
+        add: 'Add',
     }
 }; 
