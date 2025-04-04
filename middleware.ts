@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { i18n } from '@/i18n.config';
+import { i18n } from './i18n.config';
 
 import { match as matchLocale } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
@@ -24,14 +24,10 @@ export function middleware(request: NextRequest) {
         locale => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
     );
 
-    // Redirect if there is no locale
     if (pathnameIsMissingLocale) {
-        const locale = getLocale(request);
+        const locale = i18n.defaultLocale;
         return NextResponse.redirect(
-            new URL(
-                `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`,
-                request.url
-            )
+            new URL(`/${locale}${pathname}`, request.url)
         );
     }
 }

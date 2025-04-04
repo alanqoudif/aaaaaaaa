@@ -13,25 +13,17 @@ type Props = {
     params: { locale: string };
 };
 
-async function getLocale(params: { locale: string }) {
-    const locale = await Promise.resolve(params.locale);
-    if (!i18n.locales.includes(locale)) {
-        return i18n.defaultLocale;
-    }
-    return locale;
-}
-
-export default async function LocaleLayout({
+export default function LocaleLayout({
     children,
     params,
 }: Props) {
-    const locale = await getLocale(params);
-    const messages = locale === 'ar' ? arMessages : enMessages;
-    const isRTL = locale === 'ar';
-
+    const locale = params.locale;
     if (!i18n.locales.includes(locale)) {
         notFound();
     }
+
+    const messages = locale === 'ar' ? arMessages : enMessages;
+    const isRTL = locale === 'ar';
 
     return (
         <NextIntlClientProvider locale={locale} messages={messages}>
