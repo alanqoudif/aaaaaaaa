@@ -1,5 +1,3 @@
-'use client';
-
 import { NextIntlClientProvider } from 'next-intl';
 import { i18n } from '@/i18n.config';
 import arMessages from '@/messages/ar';
