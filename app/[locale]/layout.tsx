@@ -14,7 +14,7 @@ type Props = {
 };
 
 async function getLocale(params: { locale: string }) {
-    const locale = params.locale;
+    const locale = await Promise.resolve(params.locale);
     if (!i18n.locales.includes(locale)) {
         return i18n.defaultLocale;
     }
